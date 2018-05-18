@@ -4,7 +4,7 @@
         <li v-for="rota in rotas">
         <router-link :to="rota.path ? rota.path : '/'">{{rota.titulo}}</router-link>
         </li>
-        
+               
       </ul>
   
     </nav>
@@ -15,6 +15,8 @@
 export default{
      
      props: {
+
+         usuario: '',
       
         rotas: {
          type: Array,
@@ -25,6 +27,11 @@ export default{
 </script>
 
 <style>
+
+nav {
+    padding-bottom: 50px;
+}
+
 ul {
     list-style-type: none;
     margin: 0;

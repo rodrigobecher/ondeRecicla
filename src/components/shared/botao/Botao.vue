@@ -61,7 +61,7 @@ export default {
     }
 
     .botao-padrao {
-        background: darkcyan;
+        background: #354880;
         color: white;
     }
 </style>

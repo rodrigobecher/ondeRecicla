@@ -1,7 +1,7 @@
 export default class Empresa{
 
-    constructor(nome, endereco, cnpj, login, senha, residuo){
-        
+    constructor(id, nome, endereco, cnpj, login, senha, residuo){
+        this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.cnpj = cnpj;

@@ -2,6 +2,7 @@ export default class EmpresaService {
 
     constructor(resource) {
         this._resource = resource('api/empresas{/id}');
+
     }
 
     lista(){
@@ -17,7 +18,6 @@ export default class EmpresaService {
         }
         
     }
-
     apaga(id){
         return this._resource.delete({ id })
     }

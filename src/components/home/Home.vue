@@ -26,7 +26,7 @@ export default {
   
     data() {
       return {
-        titulo: 'Empresas Onde Recicla',
+        titulo: 'Empresas Onde Coleta',
         empresas:[],
         filtro: '',
         mensagem: '',
@@ -55,6 +55,7 @@ export default {
       this.service.lista()
       .then(empresas => {
         this.empresas = empresas
+        console.log(this.empresas)
       }, err => console.log(err)); 
       
     }

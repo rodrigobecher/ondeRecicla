@@ -8,27 +8,30 @@
     <form @submit.prevent="grava()">
       <div class="controle">
         <label for="nome">Nome</label>
-        <input id="nome" autocomplete="off" v-model="empresa.nome">
+        <input id="nome" required="true" autocomplete="off" v-model="empresa.nome">
       </div>
 
       <div class="controle">
         <label for="endereco">Endereco</label>
-        <input id="endereco" autocomplete="off" v-model="empresa.endereco">
+        <input id="endereco" required="true" autocomplete="off" v-model="empresa.endereco">
       </div>
     
       <div class="controle">
         <label for="cnpj">CNPJ</label>
-        <input id="cnpj" autocomplete="off" v-model="empresa.cnpj">
+        <input id="cnpj" required="true" autocomplete="off" v-model="empresa.cnpj">
       </div>
 
       <div class="controle">
         <label for="login">Login</label>
-        <input id="login" autocomplete="off" v-model="empresa.login">
+        <input id="login" required="true" autocomplete="off" v-model="empresa.login">
       </div>
 
       <div class="controle">
         <label for="senha">Senha</label>
-        <input id="senha" autocomplete="off" v-model="empresa.senha">
+        <input id="senha" required="true" autocomplete="off" v-model="empresa.senha">
+      </div>
+      <div class="controle">
+        <p>Residuos:</p>
       </div>
         <div class="controle" v-for="residuo of residuos">               
               <div>        
@@ -52,6 +55,7 @@ import Empresa from '../../domain/empresa/Empresa';
 import EmpresaService from '../../domain/empresa/EmpresaService';
 import Residuo from '../../domain/residuo/Residuo';
 import ResiduoService from '../../domain/residuo/ResiduoService';
+
 
 export default {
 
@@ -82,7 +86,7 @@ export default {
                 
                 }
             }
-          console.log(this.empresa)
+          
           this.service.cadastra(this.empresa)
           .then(() =>{
             if(this.id) this.$router.push({ name: 'home'}); // Direciona para Home
@@ -123,7 +127,7 @@ export default {
     font-weight: bold;
   }
 
- .controle label + input, .controle textarea {
+ .controle label + input, .controle textarea, .p {
     width: 100%;
     font-size: inherit;
     border-radius: 5px

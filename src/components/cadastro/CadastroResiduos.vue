@@ -8,14 +8,14 @@
     <form @submit.prevent="grava()" id="form">
       <div class="controle">
         <label for="descricao">Descrição</label>
-        <input id="descricao" autocomplete="off" v-model="residuo.descricao">
+        <input id="descricao" required="true" autocomplete="off" v-model="residuo.descricao">
       </div>
 
       <div class="controle">
         <label for="unimed">Unidade de medida</label>
-        <input id="unimed" autocomplete="off" v-model="residuo.unimed">
+        <input id="unimed" required="true" autocomplete="off" v-model="residuo.unimed">
       </div>
-      <div class="controle">
+      <div class="div-select">
           <select id="categoria" name="categoria"  >
             <option v-for="categoria of categorias" :value="categoria.id">{{categoria.descricao}}</option>
           </select>
@@ -87,7 +87,24 @@ export default {
 
 </script>
 <style scoped>
-
+  .div-select {
+    width:250px;  /* Tamanho final do select */
+    overflow:hidden; /* Esconde o conteúdo que passar do tamanho especificado */
+  }
+  
+  .div-select select {
+      background: url(http://www.webcis.com.br/images/imagens-noticias/select/ico-seta-select.gif) no-repeat #354880;  /* Imagem de fundo (Seta) */
+      background-position: 205px center;  /*Posição da imagem do background*/
+      width: 270px; /* Tamanho do select, maior que o tamanho da div "div-select" */
+      height:48px; /* altura do select, importante para que tenha a mesma altura em todo os navegadores */
+      font-family:Arial, Helvetica, sans-serif; /* Fonte do Select */
+      font-size:18px; /* Tamanho da Fonte */
+      padding:13px 20px 13px 12px; /* Configurações de padding para posicionar o texto no campo */
+      color:#fff; /* Cor da Fonte */
+      text-indent: 0.01px; /* Remove seta padrão do FireFox */
+      text-overflow: "";  /* Remove seta padrão do FireFox */     
+  
+  }
   .centralizado {
     text-align: center;
   }
