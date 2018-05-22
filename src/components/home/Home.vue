@@ -1,5 +1,6 @@
 <template>
   <div>
+    <meu-menu :rotas="routes"/>
     <h1  class="centralizado">{{ titulo }}</h1>
     <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
      <tabela :empresas="empresas" v-on:remover="remove"/>   
@@ -9,14 +10,17 @@
 <script>
 
 import Tabela from '../shared/table/Table.vue';
+import {routes} from '../../routes';
 import Botao from '../shared/botao/Botao.vue';
 import transform from '../../directives/Transform';
 import EmpresaService from '../../domain/empresa/EmpresaService';
+import Menu from '../shared/menu/Menu.vue';
 export default {
 
   components: {
     'tabela': Tabela,
-    'meu-botao' : Botao
+    'meu-botao' : Botao,
+    'meu-menu' : Menu
   },
 
   directives: {
@@ -30,6 +34,7 @@ export default {
         empresas:[],
         filtro: '',
         mensagem: '',
+         routes : routes.filter(route => route.menu)
         
       }
     },

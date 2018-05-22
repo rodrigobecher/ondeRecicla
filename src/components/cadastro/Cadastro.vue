@@ -1,67 +1,75 @@
 <template>
-
+ 
   <div>
+    <meu-menu :rotas="routes"/>
     <h1 class="centralizado">Cadastro Empresa</h1>
     <h2 class="centralizado"></h2>
     <h2 v-if="empresa.id" class="centralizado">Alterando</h2>
     <h2 v-if="!empresa.id"class="centralizado">Incluindo</h2>
-    <form @submit.prevent="grava()">
-      <div class="controle">
-        <label for="nome">Nome</label>
-        <input id="nome" required="true" autocomplete="off" v-model="empresa.nome">
-      </div>
+    <div class="container">
+      <form @submit.prevent="grava()">
+      <div class="form-group">
+          <label for="nome">Nome</label>
+          <input class="form-control" id="nome" required="true" autocomplete="off" v-model="empresa.nome">
+        </div>
 
-      <div class="controle">
-        <label for="endereco">Endereco</label>
-        <input id="endereco" required="true" autocomplete="off" v-model="empresa.endereco">
-      </div>
-    
-      <div class="controle">
-        <label for="cnpj">CNPJ</label>
-        <input id="cnpj" required="true" autocomplete="off" v-model="empresa.cnpj">
-      </div>
+        <div class="form-group">
+          <label for="endereco">Endereco</label>
+          <input class="form-control" id="endereco" required="true" autocomplete="off" v-model="empresa.endereco">
+        </div>
+      
+        <div class="form-group">
+          <label for="cnpj">CNPJ</label>
+          <input class="form-control" id="cnpj" required="true" autocomplete="off" v-model="empresa.cnpj">
+        </div>
 
-      <div class="controle">
-        <label for="login">Login</label>
-        <input id="login" required="true" autocomplete="off" v-model="empresa.login">
-      </div>
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input class="form-control" id="login" required="true" autocomplete="off" v-model="empresa.login">
+        </div>
 
-      <div class="controle">
-        <label for="senha">Senha</label>
-        <input id="senha" required="true" autocomplete="off" v-model="empresa.senha">
-      </div>
-      <div class="controle">
-        <p>Residuos:</p>
-      </div>
-        <div class="controle" v-for="residuo of residuos">               
-              <div>        
-                <input type="checkbox" id="residuo" :checked="false" name="residuo" :value="residuo.id">{{residuo.descricao}}        
-              </div> 
-      </div>
-      <div class="centralizado">
-        <meu-botao rotulo="GRAVAR" tipo="submit"/>
-        <router-link :to="{ name: 'home' }"><meu-botao rotulo="VOLTAR" tipo="button"/></router-link>
-      </div>
-
-    </form>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input class="form-control" id="senha" required="true" autocomplete="off" v-model="empresa.senha">
+        </div>
+        <div class="form-group">
+          <p>Residuos:</p>
+        </div>
+          <div class="form-group" v-for="residuo of residuos">               
+                <div>        
+                  <input class="form-control" type="checkbox" id="residuo" :checked="false" name="residuo" :value="residuo.id">{{residuo.descricao}}        
+                </div> 
+        </div>
+        <div class="centralizado">
+          <meu-botao rotulo="GRAVAR" tipo="submit"/>
+          <router-link :to="{ name: 'home' }"><meu-botao rotulo="VOLTAR" tipo="button"/></router-link>
+        </div>
+  
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
 import Botao from '../shared/botao/Botao.vue';
 import Empresa from '../../domain/empresa/Empresa';
 import EmpresaService from '../../domain/empresa/EmpresaService';
 import Residuo from '../../domain/residuo/Residuo';
+import {routes} from '../../routes';
 import ResiduoService from '../../domain/residuo/ResiduoService';
+import Menu from '../shared/menu/Menu.vue';
 
 
 export default {
 
   components: {
 
-    'meu-botao': Botao
+    'meu-botao': Botao,
+    'meu-menu' : Menu
   },
 
   data(){
@@ -70,7 +78,8 @@ export default {
           residuos:{
 
           },
-          id: this.$route.params.id
+          id: this.$route.params.id,
+          routes : routes.filter(route => route.menu)
       }
   },
 

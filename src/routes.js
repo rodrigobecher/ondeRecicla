@@ -12,7 +12,7 @@ export const routes = [
     {path: '/cadastroResiduo/:id', name: 'alteraResiduo', component: CadastroResiduo, titulo:'Cadastro Residuo', menu: false},
     {path: '/cadastroCategoria', name: 'cadastroCategoria', component: CadastroCategoria, titulo:'Cadastro Categoria', menu: true},
     {path: '/cadastroCategoria/:id', name: 'alteraCategoria', component: CadastroCategoria, titulo:'Cadastro Categoria', menu: false},
-    {path: '/loginEmpresa', name: 'loginEmpresa', component: loginEmpresa, titulo:'Login Empresa'},
+    {path: '/loginEmpresa', name: 'loginEmpresa', component: loginEmpresa, titulo:'Login Empresa', menu: true},
     {path: '/residuoEmpresa', component: residuoEmpresa, titulo:'Parametrizacao'},
     {path: '*', component: Home, menu: false},
     {path: '*', component: residuoEmpresa, menu: false}

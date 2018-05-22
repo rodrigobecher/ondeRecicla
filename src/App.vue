@@ -1,6 +1,6 @@
 <template>
   <div class="corpo">
-    <meu-menu :rotas="routes"/>
+    
    
     <transition name="pagina">
       <router-view></router-view>

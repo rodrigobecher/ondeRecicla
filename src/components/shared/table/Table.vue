@@ -1,6 +1,6 @@
 <template>
-    <div class="tabela">
-      <table>
+    <div>
+      <table class="table">
           <thead>
             <tr>
               <th>Nome</th>
@@ -28,6 +28,8 @@
 
 import Botao from '../botao/Botao.vue';
 import EmpresaService from '../../../domain/empresa/EmpresaService';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
 
       components: {
@@ -58,20 +60,4 @@ export default {
 }
 </script>
 <style scoped>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even){background-color: #f2f2f2}
-
-    th {
-        background-color: #4CAF50;
-        color: white;
-    }
 </style>

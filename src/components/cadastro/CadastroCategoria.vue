@@ -1,6 +1,7 @@
 <template>
 
   <div>
+    <meu-menu :rotas="routes"/>
     <h1 class="centralizado">Cadastro Categoria</h1>
     <h2 class="centralizado"></h2>
     <h2 v-if="categoria.id" class="centralizado">Alterando</h2>
@@ -25,17 +26,21 @@
 import Botao from '../shared/botao/Botao.vue';
 import Categoria from '../../domain/categoria/Categoria';
 import CategoriaService from '../../domain/categoria/CategoriaService';
+import {routes} from '../../routes';
+import Menu from '../shared/menu/Menu.vue';
 export default {
 
   components: {
 
-    'meu-botao': Botao
+    'meu-botao': Botao,
+    'meu-menu' : Menu
   },
 
   data(){
       return {
           categoria: new Categoria(),
-          id: this.$route.params.id
+          id: this.$route.params.id,
+          routes : routes.filter(route => route.menu)
       }
   },
 

@@ -1,48 +1,55 @@
 <template>
 
   <div>
+    <meu-menu :rotas="routes"/>
     <h1 class="centralizado">Cadastro Residuo</h1>
     <h2 class="centralizado"></h2>
     <h2 v-if="residuo.id" class="centralizado">Alterando</h2>
     <h2 v-if="!residuo.id"class="centralizado">Incluindo</h2>
-    <form @submit.prevent="grava()" id="form">
-      <div class="controle">
-        <label for="descricao">Descrição</label>
-        <input id="descricao" required="true" autocomplete="off" v-model="residuo.descricao">
-      </div>
+    <div class="container">
+      <form @submit.prevent="grava()" id="form">
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <input class="form-control" id="descricao" required="true" autocomplete="off" v-model="residuo.descricao">
+        </div>
 
-      <div class="controle">
-        <label for="unimed">Unidade de medida</label>
-        <input id="unimed" required="true" autocomplete="off" v-model="residuo.unimed">
-      </div>
-      <div class="div-select">
-          <select id="categoria" name="categoria"  >
-            <option v-for="categoria of categorias" :value="categoria.id">{{categoria.descricao}}</option>
-          </select>
-      </div>
-    
-      <div class="centralizado">
-        <meu-botao rotulo="GRAVAR" tipo="submit"/>
-        <router-link :to="{ name: 'home' }"><meu-botao rotulo="VOLTAR" tipo="button"/></router-link>
-      </div>
+        <div class="form-group">
+          <label for="unimed">Unidade de medida</label>
+          <input class="form-control" id="unimed" required="true" autocomplete="off" v-model="residuo.unimed">
+        </div>
+        <div class="div-select">
+            <select id="categoria" name="categoria"  >
+              <option v-for="categoria of categorias" :value="categoria.id">{{categoria.descricao}}</option>
+            </select>
+        </div>
+      
+        <div class="centralizado">
+          <meu-botao rotulo="GRAVAR" tipo="submit"/>
+          <router-link :to="{ name: 'home' }"><meu-botao rotulo="VOLTAR" tipo="button"/></router-link>
+        </div>
 
-    </form>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Botao from '../shared/botao/Botao.vue';
 import Residuo from '../../domain/residuo/Residuo';
 import Categoria from '../../domain/categoria/Categoria';
 import ResiduoService from '../../domain/residuo/ResiduoService';
 import CategoriaService from '../../domain/categoria/CategoriaService';
+import {routes} from '../../routes';
+import Menu from '../shared/menu/Menu.vue';
 
 export default {
 
   components: {
 
-    'meu-botao': Botao
+    'meu-botao': Botao,
+    'meu-menu' : Menu
   },
 
   data(){
@@ -51,7 +58,8 @@ export default {
           categorias: {
 
           },
-          id: this.$route.params.id
+          id: this.$route.params.id,
+          routes : routes.filter(route => route.menu)
       }
   },
 

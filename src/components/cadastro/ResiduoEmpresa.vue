@@ -1,5 +1,6 @@
 <template>
     <div>
+      <meu-menu :rotas="routes"/>
         <h1 class="centralizado">Parametrização Pontuacão Empresa</h1>
          <h2 class="centralizado"></h2>
         <h2 v-if="empresaResiduoPontuacao.id" class="centralizado">Alterando</h2>
@@ -29,21 +30,26 @@
 </template>
 
 <script>
+
+import {routes} from '../../routesEmpresa';
 import Residuo from '../../domain/residuo/Residuo';
 import EmpresaResiduoService from '../../domain/empresa/EmpresaResiduoService';
 import Botao from '../shared/botao/Botao.vue';
 import EmpresaResiduoPontuacao from '../../domain/empresa/EmpresaResiduoPontuacao';
 import ResiduoEmpresaService from '../../domain/empresa/ResiduoEmpresaService';
 import Empresa from '../../domain/empresa/Empresa';
+import Menu from '../shared/menu/Menu.vue';
 
 export default {
 
   components: {
 
-    'meu-botao': Botao
+    'meu-botao': Botao,
+    'meu-menu' : Menu
   },
   data () {
     return {
+       routes : routes.filter(route => route.menu),
       selected: '',
          residuos:{
 
