@@ -1,4 +1,4 @@
-import loginEmpresa from './components/cadastro/loginEmpresa.vue';
+import loginEmpresa from './components/cadastro/LoginEmpresa.vue';
 import residuoEmpresa from './components/cadastro/ResiduoEmpresa.vue';
 import deposito from './components/cadastro/DepositoCliente.vue';
 import Home from './components/home/Home.vue';
