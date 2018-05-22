@@ -3,6 +3,8 @@ import CadastroResiduo from './components/cadastro/CadastroResiduos.vue';
 import CadastroCategoria from './components/cadastro/CadastroCategoria.vue';
 import loginEmpresa from './components/cadastro/loginEmpresa.vue';
 import residuoEmpresa from './components/cadastro/ResiduoEmpresa.vue';
+import deposito from './components/cadastro/DepositoCliente.vue';
+import logout from './components/cadastro/Logout.vue'
 import Home from './components/home/Home.vue';
 export const routes = [
     {path: '', name:'home', component: Home, titulo:'Home', menu: true},
@@ -14,6 +16,8 @@ export const routes = [
     {path: '/cadastroCategoria/:id', name: 'alteraCategoria', component: CadastroCategoria, titulo:'Cadastro Categoria', menu: false},
     {path: '/loginEmpresa', name: 'loginEmpresa', component: loginEmpresa, titulo:'Login Empresa', menu: true},
     {path: '/residuoEmpresa', component: residuoEmpresa, titulo:'Parametrizacao'},
+    {path: '/deposito',  component: deposito, titulo:'Deposito'},
+    {path: '/logout', component: logout, titulo:'logout'},
     {path: '*', component: Home, menu: false},
     {path: '*', component: residuoEmpresa, menu: false}
 ];

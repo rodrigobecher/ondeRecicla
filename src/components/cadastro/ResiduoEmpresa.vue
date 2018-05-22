@@ -5,27 +5,29 @@
          <h2 class="centralizado"></h2>
         <h2 v-if="empresaResiduoPontuacao.id" class="centralizado">Alterando</h2>
         <h2 v-if="!empresaResiduoPontuacao.id"class="centralizado">Incluindo</h2>
+        <div class="container">
         <form @submit.prevent="grava()">
-        <div class="controle">
-            <label for="ponto">Ponto</label>
-            <input id="ponto" required="true" autocomplete="off" v-model="empresaResiduoPontuacao.ponto">
-        </div>
+          <div class="form-group">
+              <label for="ponto">Ponto</label>
+              <input class="form-control" id="ponto" required="true" autocomplete="off" v-model="empresaResiduoPontuacao.ponto">
+          </div>
 
-        <div class="controle">
-            <label for="qtdeCondicao">Quantidade condição</label>
-            <input id="qtdeCondicao" required="true" autocomplete="off" v-model="empresaResiduoPontuacao.qtdeCondicao">
+          <div class="form-group">
+              <label for="qtdeCondicao">Quantidade condição</label>
+              <input class="form-control" id="qtdeCondicao" required="true" autocomplete="off" v-model="empresaResiduoPontuacao.qtdeCondicao">
+          </div>
+          <div class="form-group">
+              <select class="form-control" v-model="selected" id="residuos" name="residuos"  >
+                  <option v-for="residuo of residuos" :value="residuo.id">{{residuo.descricao}}</option>
+              </select>
+          </div>
+          <div class="centralizado">
+              <meu-botao rotulo="Gravar" tipo="submit"/>
+              <meu-botao rotulo="Sair" tipo="button" @botaoAtivado="sair()"></meu-botao>
+              
+          </div>
+          </form>
         </div>
-        <div class="div-select">
-            <select v-model="selected" id="residuos" name="residuos"  >
-                <option v-for="residuo of residuos" :value="residuo.id">{{residuo.descricao}}</option>
-            </select>
-        </div>
-        <div class="centralizado">
-            <meu-botao rotulo="Gravar" tipo="submit"/>
-            <meu-botao rotulo="Sair" tipo="button" @botaoAtivado="sair()"></meu-botao>
-            
-        </div>
-        </form>
     </div>
 </template>
 

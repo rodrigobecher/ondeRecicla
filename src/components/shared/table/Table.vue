@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="espaco">
       <table class="table">
           <thead>
             <tr>
@@ -60,4 +60,7 @@ export default {
 }
 </script>
 <style scoped>
+.espaco{
+    margin-top: 50px;
+}
 </style>

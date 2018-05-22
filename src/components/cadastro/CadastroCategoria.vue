@@ -6,10 +6,11 @@
     <h2 class="centralizado"></h2>
     <h2 v-if="categoria.id" class="centralizado">Alterando</h2>
     <h2 v-if="!categoria.id"class="centralizado">Incluindo</h2>
+    <div class="container">
     <form @submit.prevent="grava()">
-      <div class="controle">
+      <div class="form-group">
         <label for="descricao">Descrição</label>
-        <input id="descricao" autocomplete="off" v-model="categoria.descricao">
+        <input class="form-control" id="descricao" autocomplete="off" v-model="categoria.descricao">
       </div>
     
       <div class="centralizado">
@@ -18,6 +19,7 @@
       </div>
 
     </form>
+    </div>
   </div>
 </template>
 
