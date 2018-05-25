@@ -89,13 +89,15 @@ export default {
             var residuo = new Residuo();
             var empresa = new Empresa();
             residuo.id = this.selected;
+            empresa = this.empresaResiduo;
             this.empresaResiduoPontuacao.residuo = residuo;
-            this.empresaResiduoPontuacao.empresa = this.empresaResiduo;
+            this.empresaResiduoPontuacao.empresa = empresa;
             console.log(this.empresaResiduoPontuacao)
             this.service2.cadastra(this.empresaResiduoPontuacao)
           .then(() =>{
-            //if(this.id) this.$router.push({ name: 'home'}); // Direciona para Home
-            this.empresaResiduoPontuacao = new EmpresaResiduoPontuacao()}, err => console.log(err));
+            this.empresaResiduoPontuacao = new EmpresaResiduoPontuacao()
+            this.selected = '';
+            }, err => console.log(err));
          }
     }
 }

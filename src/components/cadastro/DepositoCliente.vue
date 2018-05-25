@@ -9,8 +9,11 @@
             <div class="container">
                 <form @submit.prevent="grava()">
                 <div class="form-group">
-                    <label for="cnpj">CNPJ</label>
-                    <input class="form-control" id="cnpj" type="number" max="14" required="true" autocomplete="off" v-model="cliente.cpf">
+                    <label for="cpf">CPF</label>
+                    <input class="form-control" id="cpf" type="number" required="true" autocomplete="off" v-model="cliente.cpf">
+                    <div v-show="okCpf" class="alert alert-danger" role="alert">
+                       {{mensagemCpf}}
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -21,6 +24,9 @@
                     <select  class="form-control" v-model="selected" id="residuos" name="residuos"  >
                         <option v-for="residuo of residuos" :value="residuo.id">{{residuo.descricao}}</option>
                     </select>
+                    <div v-show="okResiduo" class="alert alert-danger" role="alert">
+                        {{mensagemResiduo}}
+                    </div>
                 </div>
                 <div class="centralizado">
                     <meu-botao rotulo="Gravar" tipo="submit"/>
@@ -43,6 +49,7 @@ import DepositoService from '../../domain/deposito/DepositoService';
 import Empresa from '../../domain/empresa/Empresa';
 import Residuo from '../../domain/residuo/Residuo';
 import Cliente from '../../domain/cliente/Cliente';
+import Deposito from '../../domain/deposito/Deposito';
 import Menu from '../shared/menu/Menu.vue';
    
     export default {
@@ -55,7 +62,11 @@ import Menu from '../shared/menu/Menu.vue';
   data () {
     return {
       
+      mensagemCpf: '',
+      mensagemResiduo: '',
       selected: '',
+      okCpf: false,
+      okResiduo: false,
          residuos:{
 
           },
@@ -97,12 +108,29 @@ import Menu from '../shared/menu/Menu.vue';
             this.deposito.residuo = residuo;
             this.deposito.empresa = this.empresaResiduo;
             this.deposito.cliente = this.cliente
-            console.log(this.deposito);
-            this.service2.cadastra(this.deposito)
-            .then(() => {
-                this.deposito = new Deposito();
-            }, err => console.log(err));
+            if(residuo.id == ''){
+                this.mensagemResiduo = "Escolha um residuo!";
+                this.okResiduo = true;
+                return
+            }else{
+                this.okResiduo = false;
+                this.service2.cadastra(this.deposito)
+                .then(retorno => {
+                    if(retorno.data.cliente.id == null){
+                        this.mensagemCpf = 'Cliente não existe na base de dados.';
+                        this.okCpf = true;
+                    }else{
+                        this.deposito = new Deposito();
+                        this.cliente = new Cliente();
+                        this.mensagemCpf = '';
+                        this.mensagemResiduo = '';
+                        this.okCpf = false;
+                        this.selected = '';
+                    }
+                }, err => console.log(err));
+            }
          }
+
     }
 }
 </script>
