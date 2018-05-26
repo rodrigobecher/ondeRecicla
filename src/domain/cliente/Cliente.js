@@ -1,7 +1,8 @@
 export default class Cliente{
 
-    constructor(id, cnpj){
+    constructor(id, cpf, pontuacao){
         this.id = id;
-        this.cpf = cnpj;
+        this.cpf = cpf;
+        this.pontuacao = pontuacao;
     }
 }

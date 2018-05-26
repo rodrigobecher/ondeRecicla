@@ -33,7 +33,8 @@ export default{
 
 nav {
     border-radius: 10px;
-    margin-bottom: 50px
+    margin-bottom: 50px;
+    margin-top: 20px;
 }
 
 ul {
