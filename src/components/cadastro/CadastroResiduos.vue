@@ -69,7 +69,6 @@ export default {
           var categoria = new Categoria();
           categoria = this.categorias[(document.getElementById("categoria").value -1)]
           this.residuo.categoria = categoria;
-          console.log(this.residuo);
           this.service.cadastra(this.residuo)
           .then(() =>{
             if(this.id) this.$router.push({ name: 'home'}); // Direciona para Home

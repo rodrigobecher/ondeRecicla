@@ -16,7 +16,7 @@
                 </div>
                  <div  class="alert alert-success" role="alert">
                     <h4 class="alert-heading">Pontuação Existente</h4>
-                    <p v-show="mostra">O cliente contém atualmente {{cliente.pontuacao}} Pontos</p>
+                    <p v-show="mostra">O cliente contém a seguinte pontuação {{cliente.pontuacao}} </p>
                     <hr>
                     </div>
                 <div class="form-group">
@@ -26,7 +26,7 @@
                
                 <div class="centralizado">
                     <meu-botao rotulo="Gravar" tipo="submit"/>
-                    <meu-botao rotulo="Sair" tipo="button" @botaoAtivado="sair()"></meu-botao>
+                     <meu-botao rotulo="Sair" tipo="button" @botaoAtivado="sair()"></meu-botao>
                     
                 </div>
                 </form>
@@ -73,7 +73,9 @@ export default {
         this.service = new clienteService(this.$resource);
     },
     methods: {        
-
+        sair(){
+         this.$router.push({ name: 'loginEmpresa'});
+        },
         busca(){
             if(this.cliente.cpf > 0){
                 this.service.busca(this.cliente)
@@ -92,14 +94,14 @@ export default {
                 alert("Cliente não encontrado!")
             }
         },
+        
          grava() {
             if(this.cliente.id != null){
                 this.ponto = this.cliente.pontuacao - this.quantidade;
-                console.log(this.ponto);
                 this.cliente.pontuacao = this.ponto;
                   this.service.cadastrar(this.cliente, this.$resource)
                 .then(cliente => {
-                    this.cliente = new Cliente();
+                    this.cliente.cpf = "";
                     this.mostra = false; 
                     this.quantidade = 0;
                 })

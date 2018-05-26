@@ -42,7 +42,6 @@ export default {
     methods: {
         remove(empresa) {
             this.service = new EmpresaService(this.$resource);
-            console.log(empresa);
             this.service.apaga(empresa.id)
             .then(() => { 
               let indice = this.empresas.indexOf(empresa);
@@ -60,7 +59,6 @@ export default {
       this.service.lista()
       .then(empresas => {
         this.empresas = empresas
-        console.log(this.empresas)
       }, err => console.log(err)); 
       
     }

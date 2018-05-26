@@ -98,7 +98,7 @@ import Menu from '../shared/menu/Menu.vue';
 
        
         if(this.empresa.id != undefined){
-            window.location.href = "http://localhost:8080/residuoEmpresa";
+            window.location.href = "http://localhost:8080/deposito";
         }else{
             
         }

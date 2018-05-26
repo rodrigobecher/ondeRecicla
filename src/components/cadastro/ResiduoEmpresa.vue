@@ -74,7 +74,6 @@ export default {
         this.service2 = new ResiduoEmpresaService(this.$resource);
         this.service.listaEmpresaResiduo(this.empresaResiduo.id)
        .then(empresa => {
-         console.log(empresa)
          this.residuos = empresa.residuo
        }, err => console.log(err));
        
@@ -92,7 +91,6 @@ export default {
             empresa = this.empresaResiduo;
             this.empresaResiduoPontuacao.residuo = residuo;
             this.empresaResiduoPontuacao.empresa = empresa;
-            console.log(this.empresaResiduoPontuacao)
             this.service2.cadastra(this.empresaResiduoPontuacao)
           .then(() =>{
             this.empresaResiduoPontuacao = new EmpresaResiduoPontuacao()

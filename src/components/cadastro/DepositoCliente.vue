@@ -89,7 +89,6 @@ import Menu from '../shared/menu/Menu.vue';
         this.service2 = new DepositoService(this.$resource);
         this.service.listaEmpresaResiduo(this.empresaResiduo.id)
        .then(empresa => {
-         console.log(empresa)
          this.residuos = empresa.residuo
        }, err => console.log(err));
        
