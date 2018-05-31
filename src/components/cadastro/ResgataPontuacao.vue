@@ -82,6 +82,8 @@ export default {
                     .then(cliente => {
                         if(cliente.id != null){
                         this.cliente = cliente;
+                        console.log(cliente);
+                        console.log(this.cliente);
                         this.mostra = true;
                         }else{
                             alert("Cliente não encontrado!")
@@ -99,6 +101,7 @@ export default {
             if(this.cliente.id != null){
                 this.ponto = this.cliente.pontuacao - this.quantidade;
                 this.cliente.pontuacao = this.ponto;
+                console.log(this.cliente)
                   this.service.cadastrar(this.cliente, this.$resource)
                 .then(cliente => {
                     this.cliente.cpf = "";

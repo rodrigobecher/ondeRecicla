@@ -11,11 +11,7 @@ export default class DepositoService {
     }
 
     cadastra(deposito){
-        if(deposito.id){
-            return this._resource.update(deposito);
-        }else{
             return this._resource.save(deposito);
-        }
         
     }
     apaga(id){

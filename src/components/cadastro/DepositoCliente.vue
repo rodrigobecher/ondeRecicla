@@ -113,12 +113,14 @@ import Menu from '../shared/menu/Menu.vue';
                 return
             }else{
                 this.okResiduo = false;
+                console.log(this.deposito)
                 this.service2.cadastra(this.deposito)
                 .then(retorno => {
                     if(retorno.data.cliente.id == null){
                         this.mensagemCpf = 'Cliente não existe na base de dados.';
                         this.okCpf = true;
                     }else{
+                        console.log(retorno);
                         this.deposito = new Deposito();
                         this.cliente = new Cliente();
                         this.mensagemCpf = '';

@@ -43,6 +43,7 @@ import Menu from '../shared/menu/Menu.vue';
 
             },
             url: 'https://frozen-spire-43188.herokuapp.com',
+           // url: 'http://localhost:8081',
             routes : routes.filter(route => route.menu),
             roteado : []
         }
@@ -65,7 +66,8 @@ import Menu from '../shared/menu/Menu.vue';
                         this.empresa.login = "";
                         var jsonAux = JSON.stringify(this.empresa);
                         window.localStorage.setItem('empresa', jsonAux);
-                        window.location.href = "http://localhost:8080/residuoEmpresa";
+                        this.$router.push({ name: 'residuoEmpresa'})
+                        
                     }
                 }); 
                                             
@@ -98,7 +100,7 @@ import Menu from '../shared/menu/Menu.vue';
 
        
         if(this.empresa.id != undefined){
-            window.location.href = "http://localhost:8080/deposito";
+            this.$router.push({ name: 'deposito'})
         }else{
             
         }
