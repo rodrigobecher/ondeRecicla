@@ -22,6 +22,10 @@
           <label for="cnpj">CNPJ</label>
           <input class="form-control" id="cnpj" required="true" autocomplete="off" v-model="empresa.cnpj">
         </div>
+        <div class="form-group">
+          <label for="url">URL Imagem</label>
+          <input class="form-control" id="url" required="true" autocomplete="off" v-model="empresa.url">
+        </div>
 
         <div class="form-group">
           <label for="login">Login</label>

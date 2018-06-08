@@ -1,7 +1,8 @@
 export default class Categoria{
 
-    constructor(descricao){
+    constructor(descricao, url){
         
         this.descricao = descricao;
+        this.url = url;
     }
 }

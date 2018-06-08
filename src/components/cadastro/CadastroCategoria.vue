@@ -12,6 +12,10 @@
         <label for="descricao">Descrição</label>
         <input class="form-control" id="descricao" autocomplete="off" v-model="categoria.descricao">
       </div>
+      <div class="form-group">
+        <label for="url">URL Imagem</label>
+        <input class="form-control" id="url" autocomplete="off" v-model="categoria.url">
+      </div>
     
       <div class="centralizado">
         <meu-botao rotulo="GRAVAR" tipo="submit"/>
