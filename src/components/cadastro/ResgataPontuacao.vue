@@ -20,9 +20,7 @@
                     <b-btn class="mt-3" variant="outline-danger" block @click="sim()">Sim</b-btn>
                     <b-btn class="mt-3" variant="outline-danger" block @click="nao()">Não</b-btn>
                     </b-modal>
-                </div>
-                                    
-                    
+                </div>                 
                 <form @submit.prevent="grava()">
                 <div class="form-group">
                     <label for="cpf">CPF</label>
@@ -35,16 +33,15 @@
                     <h4 class="alert-heading">Pontuação Existente</h4>
                     <p v-show="mostra">O cliente contém a seguinte pontuação {{cliente.pontuacao}} </p>
                     <hr>
-                    </div>
-               
+                    </div>               
                 <div class="alert alert-success">
                     <div class="container">
                         <h1 class="display-4">Valores monetários</h1>
                         <p class="lead">Selecione a pontuação correspondente para valorizar o ponto</p>
                         <div class="form-group">
-                            <div class="alinhadoDireita">
-                                <p>10 Pontos</p>
-                                <label for="one" class="label label-default">{{ponto1}}</label>
+                            <div class="alinhadoDireita">                                
+                                <p>{{ponto1}} Pontos</p>
+                                <label for="one" class="label label-default">{{valor1}} R$</label>
                                 <div class="col-md-9">
                                     <input type="radio" id="one" value=5 v-model="valor">
                                 </div>
@@ -52,8 +49,8 @@
                         </div>
                         <div class="form-group">
                             <div class="alinhadoDireita">
-                                <p>20 Pontos</p>
-                                <label for="inteira" class="label label-default">{{ponto2}}</label>
+                                <p>{{ponto2}} Pontos</p>
+                                <label for="inteira" class="label label-default">{{valor2}} R$</label>
                                 <div class="col-md-9">
                                     <input type="radio" id="two" value=10 v-model="valor">
                                 </div>
@@ -61,8 +58,8 @@
                         </div>
                         <div class="form-group">
                             <div class="alinhadoDireita">
-                                <p>30 Pontos</p>
-                                <label for="inteira" class="label label-default">{{ponto3}}</label>
+                                <p>{{ponto3}} Pontos</p>
+                                <label for="inteira" class="label label-default">{{valor3}}R$</label>
                                 <div class="col-md-9">
                                     <input type="radio" id="thre" value=15 v-model="valor">
                                 </div>
@@ -75,9 +72,6 @@
                         
                     </div>
                 </div>
-           
-                
-               
                 <div class="form-group">
                     <div class="centralizado">
                         <div class="posicao">
@@ -111,10 +105,13 @@ export default {
 
     data () {
         return {
-            valor: '',
-            ponto1: 5,
-            ponto2: 10,
-            ponto3: 20,
+            valor: 0,
+            ponto1: 10,
+            ponto2: 20,
+            ponto3: 30,
+            valor1: 5,
+            valor2: 10,
+            valor3: 15,
             mensagemCpf: '',
             mostra: false,
             selected: '',
@@ -146,8 +143,7 @@ export default {
                     .then(cliente => {
                         if(cliente.id != null){
                         this.cliente = cliente;
-                        console.log(cliente);
-                        console.log(this.cliente);
+                        this.cliente.valor = cliente.valor;
                         this.mostra = true;
                         }else{
                             this.mostrarErro1 =true;
@@ -184,21 +180,15 @@ export default {
         },
         
          grava() {
-             this.cliente.valor = 0;
             this.naograva = true;
             if(this.cliente.id != null ){
                 if(this.cliente.pontuacao >= this.ponto1 && this.cliente.pontuacao >= this.ponto2 && this.cliente.pontuacao >= this.ponto3){
-                    this.cliente.valor = 15;
-                    
+                    this.cliente.valor = this.cliente.valor + 15;                 
                 }else if(this.cliente.pontuacao >= this.ponto1 && this.cliente.pontuacao >= this.ponto2) {
-                    this.cliente.valor = 10;
+                    this.cliente.valor = this.cliente.valor + 10;
                 }else if(this.cliente.pontuacao >= this.ponto1){
-                     this.cliente.valor = 5;
+                     this.cliente.valor = this.cliente.valor + 5;
                 }
-                console.log(this.valor)
-                 console.log(this.cliente.pontuacao)
-                 console.log(this.gravar)
-                 console.log(this.naograva)
                  if(!this.gravar && this.valor != 15){
                      if(this.cliente.pontuacao >= this.ponto1 || this.cliente.pontuacao >= this.ponto2){
                     this.erro = "Tem certeza que deseja resgatar um valor menor que a pontuação disponível?"
@@ -209,7 +199,14 @@ export default {
                  }
                 if(this.naograva){
                     if(this.cliente.valor != 0){
-                        this.cliente.pontuacao = 0;
+                        if(this.valor == 15){
+                            this.ponto = 30;
+                        }else if(this.valor == 10){
+                            this.ponto = 20;
+                        }else if(this.valor == 5){
+                            this.ponto = 10;
+                        }
+                        this.cliente.pontuacao = this.cliente.pontuacao - this.ponto;       
                         this.service.cadastrar(this.cliente, this.$resource)
                         .then(cliente => {
                             this.cliente.cpf = "";
@@ -221,8 +218,7 @@ export default {
                     this.erro = "A quantidade de pontos não foi atingida" 
                         
                     //alert("A quantidade de pontos não foi atingida")    
-                    }
-                   
+                    }                  
                 }else{
                      return
                 }

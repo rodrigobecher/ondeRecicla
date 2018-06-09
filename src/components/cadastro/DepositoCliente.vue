@@ -5,17 +5,25 @@
             <h1 class="centralizado">Deposito Cliente</h1>
             <h2 class="centralizado"></h2>
             <h2 v-if="deposito.id" class="centralizado">Alterando</h2>
-            <h2 v-if="!deposito.id"class="centralizado">Incluindo</h2>
+            <h2 v-if="!deposito.id"class="centralizado">Incluindo</h2>            
             <div class="container">
+                <div v-show="mostrarErro1" class="alert alert-danger alert-dismissible">
+                        <button @click="fechar()" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+                        <strong>Error!</strong> {{erro}}
+                </div>
                 <form @submit.prevent="grava()">
                 <div class="form-group">
                     <label for="cpf">CPF</label>
-                    <input class="form-control" id="cpf" type="number" required="true" autocomplete="off" v-model="cliente.cpf">
+                    <input class="form-control" id="cpf" type="number" required="true" autocomplete="off" @blur="busca()" v-model="cliente.cpf">
                     <div v-show="okCpf" class="alert alert-danger" role="alert">
                        {{mensagemCpf}}
                     </div>
                 </div>
-
+                <div  class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Cliente</h4>
+                    <p>{{clienteNome}}</p>
+                    <hr>
+                    </div>
                 <div class="form-group">
                     <label for="quantidade">Quantidade</label>
                     <input class="form-control" id="quantidade" max="500" type="number" required="true" autocomplete="off" v-model="deposito.quantidade">
@@ -50,6 +58,7 @@ import Empresa from '../../domain/empresa/Empresa';
 import Residuo from '../../domain/residuo/Residuo';
 import Cliente from '../../domain/cliente/Cliente';
 import Deposito from '../../domain/deposito/Deposito';
+import clienteService from '../../domain/cliente/ClienteService';
 import Menu from '../shared/menu/Menu.vue';
    
     export default {
@@ -64,6 +73,8 @@ import Menu from '../shared/menu/Menu.vue';
       
       mensagemCpf: '',
       mensagemResiduo: '',
+      clienteNome:'',
+      mostrarErro1: false,
       selected: '',
       okCpf: false,
       okResiduo: false,
@@ -80,6 +91,7 @@ import Menu from '../shared/menu/Menu.vue';
 
           },
            routes : routes.filter(route => route.menu),
+           erro:''
     }
   },
     created() {
@@ -87,7 +99,9 @@ import Menu from '../shared/menu/Menu.vue';
         this.empresaResiduo = JSON.parse(jsonEmpresa);
         this.service = new EmpresaResiduoService(this.$resource);
         this.service2 = new DepositoService(this.$resource);
+        this.serviceCliente = new clienteService(this.$resource);
         this.service.listaEmpresaResiduo(this.empresaResiduo.id)
+        
        .then(empresa => {
          this.residuos = empresa.residuo
        }, err => console.log(err));
@@ -95,6 +109,26 @@ import Menu from '../shared/menu/Menu.vue';
 
     },
     methods: {
+        busca(){
+            if(this.cliente.cpf > 0){
+                this.serviceCliente.busca(this.cliente)
+                    .then(cliente => {
+                        if(cliente.id != null){
+                           this.clienteNome = cliente.nome;
+                            console.log(cliente)
+                        }else{
+                            this.mostrarErro1 =true;
+                           this.erro = "Cliente não encontrado" 
+                        }
+                    }, err => {
+                        console.log(err)
+                    });    
+                    
+            }else{
+                this.mostrarErro1 =true;
+               this.erro = "Cliente não encontrado" 
+            }
+        },
         sair(){
           window.localStorage.clear();
           this.$router.push({ name: 'loginEmpresa'});

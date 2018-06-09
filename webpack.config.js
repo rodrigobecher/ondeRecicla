@@ -45,9 +45,7 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  devServer: {
-    //ip
-	//porta
+  devServer: {		
     historyApiFallback: true,
     noInfo: true,
     overlay: true
