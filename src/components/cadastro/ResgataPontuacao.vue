@@ -8,13 +8,13 @@
             <div class="container">
                 <div v-show="mostrarErro1" class="alert alert-danger alert-dismissible">
                         <button @click="fechar()" class="close" data-dismiss="alert" aria-label="close">&times;</button>
-                        <strong>Error!</strong> {{erro}}
+                        <strong></strong> {{erro}}
                 </div>
                 <div>
                     <b-modal ref="myModalRef" hide-footer title="Alerta">
                     <div class="d-block text-center">
                          <div v-show="mostrarErro2" class="alert alert-danger alert-dismissible">
-                        <strong>Error!</strong> {{erro}}
+                        <strong></strong> {{erro}}
                      </div>
                     </div>
                     <b-btn class="mt-3" variant="outline-danger" block @click="sim()">Sim</b-btn>
@@ -206,13 +206,18 @@ export default {
                         }else if(this.valor == 5){
                             this.ponto = 10;
                         }
-                        this.cliente.pontuacao = this.cliente.pontuacao - this.ponto;       
-                        this.service.cadastrar(this.cliente, this.$resource)
-                        .then(cliente => {
-                            this.cliente.cpf = "";
-                            this.mostra = false; 
-                            this.quantidade = 0;
-                    })
+                        if(this.ponto > this.cliente.pontuacao){
+                            this.mostrarErro1 =true;
+                             this.erro = "A quantidade de pontos não foi atingida" 
+                        }else{
+                                this.cliente.pontuacao = this.cliente.pontuacao - this.ponto;       
+                                this.service.cadastrar(this.cliente, this.$resource)
+                                .then(cliente => {
+                                    this.cliente.cpf = "";
+                                    this.mostra = false; 
+                                    this.quantidade = 0;
+                            })
+                        }
                     }else{
                         this.mostrarErro1 =true;
                     this.erro = "A quantidade de pontos não foi atingida" 
