@@ -4,8 +4,7 @@
     <meu-menu :rotas="routes"/>
     <h1 class="centralizado">Cadastro Empresa</h1>
     <h2 class="centralizado"></h2>
-    <h2 v-if="empresa.id" class="centralizado">Alterando</h2>
-    <h2 v-if="!empresa.id"class="centralizado">Incluindo</h2>
+    
     <div class="container">
       <form @submit.prevent="grava()">
       <div class="form-group">

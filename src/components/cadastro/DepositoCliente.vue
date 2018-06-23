@@ -2,14 +2,13 @@
     <div>
       <meu-menu :rotas="routes"/>
         <div class = "page-header">
-            <h1 class="centralizado">Deposito Cliente</h1>
+            <h1 class="centralizado">Depósito Cliente</h1>
             <h2 class="centralizado"></h2>
-            <h2 v-if="deposito.id" class="centralizado">Alterando</h2>
-            <h2 v-if="!deposito.id"class="centralizado">Incluindo</h2>            
+             
             <div class="container">
                 <div v-show="mostrarErro1" class="alert alert-danger alert-dismissible">
                         <button @click="fechar()" class="close" data-dismiss="alert" aria-label="close">&times;</button>
-                        <strong>Error!</strong> {{erro}}
+                        <strong> {{erro}}</strong>
                 </div>
                 <form @submit.prevent="grava()">
                 <div class="form-group">
@@ -29,6 +28,7 @@
                     <input class="form-control" id="quantidade" max="500" type="number" required="true" autocomplete="off" v-model="deposito.quantidade">
                 </div>
                 <div class="form-group">
+                    <label for="quantidade">Resíduo</label>
                     <select  class="form-control" v-model="selected" id="residuos" name="residuos"  >
                         <option v-for="residuo of residuos" :value="residuo.id">{{residuo.descricao}}</option>
                     </select>
@@ -110,6 +110,7 @@ import Menu from '../shared/menu/Menu.vue';
     },
     methods: {
         busca(){
+            this.mostrarErro1 = false
             if(this.cliente.cpf > 0){
                 this.serviceCliente.busca(this.cliente)
                     .then(cliente => {

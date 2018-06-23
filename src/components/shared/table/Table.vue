@@ -7,7 +7,7 @@
               <th>CNPJ</th>
               <th>Endereco</th>
               <th>Alterar</th>
-              <th>Remover</th>
+              <th>Inativar</th>
             </tr>
           </thead>  
           <tbody v-for="empresa of empresas">
@@ -16,7 +16,7 @@
                     <td>{{empresa.cnpj}}</td>
                     <td>{{empresa.endereco}}</td>
                     <td><router-link :to="{ name : 'altera', params: { id: empresa.id}}"><meu-botao rotulo="Alterar" tipo="button"/></router-link></td>
-                    <td> <meu-botao rotulo="Remover" tipo="button" @botaoAtivado="remove(empresa)"></meu-botao></td>
+                    <td> <meu-botao rotulo="Inativar" tipo="button" @botaoAtivado="remove(empresa)"></meu-botao></td>
                 </tr>
                 
          </tbody>

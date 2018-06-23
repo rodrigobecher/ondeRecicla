@@ -8,13 +8,13 @@
             <div class="container">
                 <div v-show="mostrarErro1" class="alert alert-danger alert-dismissible">
                         <button @click="fechar()" class="close" data-dismiss="alert" aria-label="close">&times;</button>
-                        <strong></strong> {{erro}}
+                        <strong>{{erro}}</strong> 
                 </div>
                 <div>
                     <b-modal ref="myModalRef" hide-footer title="Alerta">
                     <div class="d-block text-center">
                          <div v-show="mostrarErro2" class="alert alert-danger alert-dismissible">
-                        <strong></strong> {{erro}}
+                        <strong>{{erro}}</strong> 
                      </div>
                     </div>
                     <b-btn class="mt-3" variant="outline-danger" block @click="sim()">Sim</b-btn>
@@ -138,6 +138,7 @@ export default {
          this.$router.push({ name: 'loginEmpresa'});
         },
         busca(){
+            this.mostrarErro1 = false;
             if(this.cliente.cpf > 0){
                 this.service.busca(this.cliente)
                     .then(cliente => {
@@ -190,11 +191,11 @@ export default {
                      this.cliente.valor = this.cliente.valor + 5;
                 }
                  if(!this.gravar && this.valor != 15){
-                     if(this.cliente.pontuacao >= this.ponto1 || this.cliente.pontuacao >= this.ponto2){
-                    this.erro = "Tem certeza que deseja resgatar um valor menor que a pontuação disponível?"
-                    this.mostrarErro2=true;
-                     this.$refs.myModalRef.show()
-                    this.naograva = false
+                     if(this.cliente.pontuacao > this.ponto1 || this.cliente.pontuacao >= this.ponto2){
+                         this.erro = "Tem certeza que deseja resgatar um valor menor que a pontuação disponível?"
+                         this.mostrarErro2=true;
+                        this.$refs.myModalRef.show()
+                        this.naograva = false
                      }
                  }
                 if(this.naograva){
@@ -210,6 +211,7 @@ export default {
                             this.mostrarErro1 =true;
                              this.erro = "A quantidade de pontos não foi atingida" 
                         }else{
+                                this.mostrarErro2 = false;
                                 this.cliente.pontuacao = this.cliente.pontuacao - this.ponto;       
                                 this.service.cadastrar(this.cliente, this.$resource)
                                 .then(cliente => {

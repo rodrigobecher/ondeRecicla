@@ -3,8 +3,7 @@
       <meu-menu :rotas="routes"/>
         <h1 class="centralizado">Parametrização Pontuacão Empresa</h1>
          <h2 class="centralizado"></h2>
-        <h2 v-if="empresaResiduoPontuacao.id" class="centralizado">Alterando</h2>
-        <h2 v-if="!empresaResiduoPontuacao.id"class="centralizado">Incluindo</h2>
+     
         <div class="container">
         <form @submit.prevent="grava()">
           <div class="form-group">
@@ -17,6 +16,7 @@
               <input class="form-control" id="qtdeCondicao" required="true" autocomplete="off" v-model="empresaResiduoPontuacao.qtdeCondicao">
           </div>
           <div class="form-group">
+             <label for="qtdeCondicao">Resíduo</label>
               <select class="form-control" v-model="selected" id="residuos" name="residuos"  >
                   <option v-for="residuo of residuos" :value="residuo.id">{{residuo.descricao}}</option>
               </select>
