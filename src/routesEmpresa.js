@@ -7,7 +7,7 @@ import resgataPontuacao from './components/cadastro/ResgataPontuacao.vue';
 export const routes = [
     {path: '', name:'home', component: Home, titulo:'Home', menu: true},
     
-    {path: '/residuoEmpresa', name:'parametrizacaoEmpresa', component: residuoEmpresa, titulo:'Parametrizacao', menu: true},
+    {path: '/residuoEmpresa', name:'parametrizacaoEmpresa', component: residuoEmpresa, titulo:'Parametrização', menu: true},
     {path: '/deposito', name:'deposito', component: deposito, titulo:'Depósito', menu: true},
     {path: '/resgataPontuacao',  component: resgataPontuacao, titulo:'Resgatar Pontuação', menu: true},
     

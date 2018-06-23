@@ -5,7 +5,7 @@
             <tr>
               <th>Nome</th>
               <th>CNPJ</th>
-              <th>Endereco</th>
+              <th>Endereço</th>
               <th>Alterar</th>
               <th>Inativar</th>
             </tr>
